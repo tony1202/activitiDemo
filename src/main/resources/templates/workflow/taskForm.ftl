@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/js/commons.jspf" %>
-<%@taglib uri="/struts-tags" prefix="s" %>
-<html>
+<html lang="en">
 <head>
+    <script language="JavaScript" src="../../static/js/jquery.js"></script>
+    <script language="JavaScript" src="../../static/js/jquery.blockUI.js"></script>
+    <script language="JavaScript" src="../../static/js/navbar.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/public.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>请假任务办理</title>
 </head>

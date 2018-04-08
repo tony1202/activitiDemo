@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/js/commons.jspf" %>
-<%@taglib uri="/struts-tags" prefix="s"%>
-<html>
+
+<html lang="en">
 <head>
+    <script language="JavaScript" src="../../static/js/jquery.js"></script>
+    <script language="JavaScript" src="../../static/js/jquery.blockUI.js"></script>
+    <script language="JavaScript" src="../../static/js/navbar.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/public.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>任务管理</title>
 </head>
@@ -36,20 +37,20 @@
 		        <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">办理人</span></div></td>
 		        <td width="20%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
 		      </tr>
-		      <s:if test="#list!=null && #list.size()>0">
-		      	<s:iterator value="#list">
+			  <#if list??&&(list?size>0)>
+			  	<#list list as task>
 		      		<tr>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><s:property value="id"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="name"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="assignee"/></div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">${task.id}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${task.name}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${task.createTime?string('yyyy-MM-dd HH:mm:ss')}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${task.assignee}</div></td>
 				        <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
-				        	<a href="${pageContext.request.contextPath }/workflowAction_viewTaskForm.action?taskId=<s:property value="id"/>">办理任务</a>
-							<a target="_blank" href="workflowAction_viewCurrentImage.action?taskId=<s:property value="id"/>">查看当前流程图</a>
+				        	<a href="workflowAction_viewTaskForm?taskId=${task.id}">办理任务</a>
+							<a target="_blank" href="workflowAction_viewCurrentImage?taskId=${task.id}">查看当前流程图</a>
 				        </div></td>
 				    </tr> 
-		      	</s:iterator>
-		      </s:if>
+				</#list>
+			  </#if>
 		        
 		      
 		    </table></td>
