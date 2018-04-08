@@ -1,5 +1,8 @@
 package com.lw.activitidemo.web.controller;
 
+import com.lw.activitidemo.pojo.Employee;
+import com.lw.activitidemo.sevice.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,11 +12,20 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    @Autowired
+    private EmployeeService employeeService;
+
     @PostMapping("/tologin")
     public String doLogin(String name, HttpSession session){
 
         if (name!=null){
-            session.setAttribute("user",name);
+            Employee employee = null;
+            try {
+                employee = employeeService.findByName(name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            session.setAttribute("user",employee);
         }
         return "main";
     }

@@ -1,4 +1,4 @@
-<html>
+<html lang="en">
 <head>
     <script language="JavaScript" src="../static/js/jquery.js"></script>
     <script language="JavaScript" src="../static/js/jquery.blockUI.js"></script>
@@ -34,7 +34,7 @@ body {
 	            <td width="33" height="27"><img src="../static/images/main_05.gif" width="33" height="27" /></td>
 	            <td width="448" background="../static/images/main_06.gif"><table width="425" border="0" align="center" cellpadding="0" cellspacing="0">
 	              <tr>
-	                <td><div align="right"><span class="STYLE6"><b>当前登录用户：${sessionScope.globle_user.name }</b></span></div></td>
+	                <td><div align="right"><span class="STYLE6"><b>当前登录用户：${user.name!'admin'}</b></span></div></td>
 	                <td><div align="right"><a href="loginAction_logout" target="parent"><img src="../static/images/quit.gif" width="69" height="17" /></a></div></td>
 	              </tr>
 	            </table></td>

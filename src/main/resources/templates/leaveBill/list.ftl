@@ -41,7 +41,7 @@
 		        <td width="5%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">请假状态</span></div></td>
 		        <td width="25%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">操作</span></div></td>
 		      </tr>
-			  <#if (list!=null&&list.size()>0)>
+			  <#if list??&&(list?size>0)>
 				<#list list as leaveBill>
 		      		<tr>
 				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">${leaveBill.id}</div></td>
@@ -49,7 +49,7 @@
 				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${leaveBill.days}</div></td>
 				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${leaveBill.content}</div></td>
 				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${leaveBill.remark}</div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${leaveBill.leaveDate?string('yyyy-MM-dd')}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${leaveBill.leaveDate?string('yyyy-MM-dd HH:mm:ss')}</div></td>
 				        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
 				        	<div align="center">
 								<#switch leaveBill.state>

@@ -164,7 +164,7 @@ a {text-decoration:none;color:black}
     <td height="19" background="../static/images/main_69.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="1%">&nbsp;</td>
-        <td width="99%" valign="bottom"><span class="STYLE3">tony(QQ:506069708)</span></td>
+        <td width="99%" valign="bottom"><span class="STYLE3">@@</span></td>
       </tr>
     </table></td>
   </tr>

@@ -1,20 +1,35 @@
 package com.lw.activitidemo.pojo;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * 用户表
  */
-
+@Table(name = "employee")
 public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;//主键I
+	@Column
 	private String name;//用户
+	@Column
 	private String password;//密码
+	@Column
 	private String email;//电子邮箱
+	@Column
 	private String role;//角色
+	@Column
+	private long manager_id;
+
+	public long getManager_id() {
+		return manager_id;
+	}
+
+	public void setManager_id(long manager_id) {
+		this.manager_id = manager_id;
+	}
+
+	@Transient
 	private Employee manager;
 	
 	public Long getId() {
