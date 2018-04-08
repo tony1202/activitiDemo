@@ -19,13 +19,22 @@ public class LeaveBill {
 	private Date leaveDate = new Date();// 请假时间
 	@Column
 	private String remark;// 备注
-	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@Column
+    private Long user_id;
+	@Transient
 	private Employee user;// 请假人
 	@Column
 	private Integer state=0;// 请假单状态 0初始录入,1.开始审批,2为审批完成
 
-	public Long getId() {
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
+
+    public Long getId() {
 		return id;
 	}
 

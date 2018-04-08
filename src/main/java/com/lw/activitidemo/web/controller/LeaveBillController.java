@@ -37,9 +37,9 @@ public class LeaveBillController {
     @RequestMapping("/leaveBillAction_save")
     public String save(LeaveBill leaveBill, HttpSession session){
         Employee user = (Employee) session.getAttribute("user");
-        leaveBill.setUser(user);
-        System.out.println(leaveBill.getContent());
-        return "leaveBillAction_home";
+        leaveBill.setUser_id(user.getId());
+        leaveBillService.save(leaveBill);
+        return "forward:leaveBillAction_home";
     }
 
     @RequestMapping("/leaveBillAction_delete")

@@ -53,10 +53,10 @@
 				        <td height="20" bgcolor="#FFFFFF" class="STYLE19">
 				        	<div align="center">
 								<#switch leaveBill.state>
-								    <#case "0">
+								    <#case 0>
 										初始录入
 									<#break >
-									<#case "1">
+									<#case 1>
 									审核中
 									<#break >
 									<#default >
@@ -67,12 +67,12 @@
 			            </td>
 				        <td height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE21">
 							<#switch leaveBill.state>
-								<#case "0">
+								<#case 0>
 										<a href="/leaveBillAction_input?id=${leaveBill.id}" >修改</a>
 										<a href="/leaveBillAction_delete?id=${leaveBill.id}" >删除</a>
 										<a href="/workflowAction_startProcess?id=${leaveBill.id}" >申请请假</a>
 									<#break >
-								<#case "1">
+								<#case 1>
 										<a href="/workflowAction_viewHisComment?id=${leaveBill.id}" >查看审核记录</a>
 									<#break >
 								<#default >
