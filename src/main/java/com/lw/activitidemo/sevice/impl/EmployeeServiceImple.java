@@ -24,4 +24,10 @@ public class EmployeeServiceImple implements EmployeeService{
             return employees.get(0);
         return null;
     }
+
+    @Override
+    public String findManagerByName(String name) {
+
+        return employMapper.findManagerByName(name);
+    }
 }

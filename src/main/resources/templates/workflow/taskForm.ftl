@@ -16,7 +16,7 @@
 		          <tr>
 		            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		              <tr>
-		                <td width="6%" height="19" valign="bottom"><div align="center"><img src="${pageContext.request.contextPath }/images/tb.gif" width="14" height="14" /></div></td>
+		                <td width="6%" height="19" valign="bottom"><div align="center"><img src="../../static/images/tb.gif" width="14" height="14" /></div></td>
 		                <td width="94%" valign="bottom"><span class="STYLE1">请假申请的任务办理</span></td>
 		              </tr>
 		            </table></td>
@@ -29,22 +29,22 @@
 		  </tr>
 		  <tr>
 		  	<td>
-		  		<form action="workflowAction_submitTask.action" method="POST">
+		  		<form action="workflowAction_submitTask" method="POST">
 			  		<div align="left" class="STYLE21">
 			  			<!-- 任务ID -->
-			  			<s:hidden name="taskId"></s:hidden>
+			  			<input type="hidden" name="taskId"/>
 			  			<!-- 请假单ID -->
-			  			<s:hidden name="id"></s:hidden>
-				 		请假天数:<s:textfield name="days" disabled="true" cssStyle="width: 200px;"/><br/>
-				 		请假原因:<s:textfield name="content" disabled="true" cssStyle="width: 800px;"/><br/>
-				 		请假备注:<s:textarea name="remark" disabled="true" cols="30" rows="2"/><br/>
-				 		批&emsp;&emsp;注:<s:textarea name="comment" cols="50" rows="5"/><br/>
+			  			<input type="hidden" name="id"/>
+				 		请假天数:<input type="text" name="days" disabled="true" cssStyle="width: 200px;"/><br/>
+				 		请假原因:<input type="text" name="content" disabled="true" cssStyle="width: 800px;"/><br/>
+				 		请假备注:<input type="text" name="remark" disabled="true" cols="30" rows="2"/><br/>
+				 		批&emsp;&emsp;注:<input type="text" name="comment" cols="50" rows="5"/><br/>
 				 		<!-- 使用连线的名称作为按钮 -->
-				 		<s:if test="#outcomeList!=null && #outcomeList.size()>0">
-				 			<s:iterator value="#outcomeList">
+						<#if outcomeList??(outcomeList?size>0)>
+							<#list outcomeList as outcome>
 				 				<input type="submit" name="outcome" value="<s:property/>" class="button_ok"/>
-				 			</s:iterator>
-				 		</s:if>
+							</#list>
+						</#if>
 			 		</div>
 			 	</form>
 		  	</td>
@@ -52,7 +52,7 @@
 	</table>
 	<hr>
 	<br>
-	<s:if test="#commentList!=null && #commentList.size()>0">
+	<#if commentList??(commentList?size>0)>
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			  <tr>
 			    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -61,7 +61,7 @@
 			          <tr>
 			            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
 			              <tr>
-			                <td width="6%" height="19" valign="bottom"><div align="center"><img src="${pageContext.request.contextPath }/images/tb.gif" width="14" height="14" /></div></td>
+			                <td width="6%" height="19" valign="bottom"><div align="center"><img src="../../static/images/tb.gif" width="14" height="14" /></div></td>
 			                <td width="94%" valign="bottom"><span class="STYLE1">显示请假申请的批注信息</span></td>
 			              </tr>
 			            </table></td>
@@ -79,20 +79,18 @@
 			        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">批注人</span></div></td>
 			        <td width="75%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">批注信息</span></div></td>
 			      </tr>
-			      <s:iterator value="#commentList">
+				  <#list commentList as comment>
 			      	<tr>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="userId"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="fullMessage"/></div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">${comment.date?string('yyyy-MM-dd HH:mm:ss')}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${comment.userId}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${comment.fullMessage}</div></td>
 				    </tr> 
-			      </s:iterator>
-			        
+				  </#list>
 			      
 			    </table></td>
 			  </tr>
 		</table>
-	</s:if>
-	<s:else>
+	<#else >
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			  <tr>
 			    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -101,7 +99,7 @@
 			          <tr>
 			            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
 			              <tr>
-			                <td width="6%" height="19" valign="bottom"><div align="center"><img src="${pageContext.request.contextPath }/images/tb.gif" width="14" height="14" /></div></td>
+			                <td width="6%" height="19" valign="bottom"><div align="center"><img src="../../static/images/tb.gif" width="14" height="14" /></div></td>
 			                <td width="94%" valign="bottom"><span><b>暂时没有批注信息</b></span></td>
 			              </tr>
 			            </table></td>
@@ -111,8 +109,7 @@
 			    </table></td>
 			  </tr>
 		</table>
-	</s:else>
-	
+	</#if>
 		<%--  --%>
 </body>
 </html>

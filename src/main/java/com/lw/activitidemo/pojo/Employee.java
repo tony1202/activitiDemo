@@ -19,13 +19,13 @@ public class Employee {
 	@Column
 	private String role;//角色
 	@Column
-	private long manager_id;
+	private Long manager_id;
 
-	public long getManager_id() {
+	public Long getManager_id() {
 		return manager_id;
 	}
 
-	public void setManager_id(long manager_id) {
+	public void setManager_id(Long manager_id) {
 		this.manager_id = manager_id;
 	}
 

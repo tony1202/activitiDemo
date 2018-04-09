@@ -17,7 +17,7 @@
 		          <tr>
 		            <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
 		              <tr>
-		                <td width="6%" height="19" valign="bottom"><div align="center"><img src="${pageContext.request.contextPath }/images/tb.gif" width="14" height="14" /></div></td>
+		                <td width="6%" height="19" valign="bottom"><div align="center"><img src="../../static/images/tb.gif" width="14" height="14" /></div></td>
 		                <td width="94%" valign="bottom"><span class="STYLE1">个人任务管理列表</span></td>
 		              </tr>
 		            </table></td>
