@@ -63,6 +63,5 @@ public class WorkflowBean {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
-	
+
 }

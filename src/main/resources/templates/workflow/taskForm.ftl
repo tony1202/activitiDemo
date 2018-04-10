@@ -32,17 +32,17 @@
 		  		<form action="workflowAction_submitTask" method="POST">
 			  		<div align="left" class="STYLE21">
 			  			<!-- 任务ID -->
-			  			<input type="hidden" name="taskId"/>
+			  			<input type="hidden" name="taskId" value="${taskId}"/>
 			  			<!-- 请假单ID -->
-			  			<input type="hidden" name="id"/>
-				 		请假天数:<input type="text" name="days" disabled="true" cssStyle="width: 200px;"/><br/>
-				 		请假原因:<input type="text" name="content" disabled="true" cssStyle="width: 800px;"/><br/>
-				 		请假备注:<input type="text" name="remark" disabled="true" cols="30" rows="2"/><br/>
+			  			<input type="hidden" name="id" value="${leaveBill.id}"/>
+				 		请假天数:<input type="text" name="days" value="${leaveBill.days}" disabled="true" cssStyle="width: 200px;"/><br/>
+				 		请假原因:<input type="text" name="content" value="${leaveBill.content}" disabled="true" cssStyle="width: 800px;"/><br/>
+				 		请假备注:<input type="text" name="remark" value="${leaveBill.remark}" disabled="true" cols="30" rows="2"/><br/>
 				 		批&emsp;&emsp;注:<input type="text" name="comment" cols="50" rows="5"/><br/>
 				 		<!-- 使用连线的名称作为按钮 -->
-						<#if outcomeList??(outcomeList?size>0)>
+						<#if outcomeList??&&(outcomeList?size>0)>
 							<#list outcomeList as outcome>
-				 				<input type="submit" name="outcome" value="<s:property/>" class="button_ok"/>
+				 				<input type="submit" name="outcome" value="${outcome}" class="button_ok"/>
 							</#list>
 						</#if>
 			 		</div>
@@ -52,7 +52,7 @@
 	</table>
 	<hr>
 	<br>
-	<#if commentList??(commentList?size>0)>
+	<#if commentList??&&(commentList?size>0)>
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			  <tr>
 			    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">

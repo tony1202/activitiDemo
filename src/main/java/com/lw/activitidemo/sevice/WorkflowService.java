@@ -4,10 +4,12 @@ import com.lw.activitidemo.pojo.LeaveBill;
 import com.lw.activitidemo.web.form.WorkflowBean;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 public interface WorkflowService {
@@ -31,5 +33,19 @@ public interface WorkflowService {
     //查看流程图
     public InputStream getPrcessImage(String deploymentId,String resourceName);
 
+    //根据任务Id查找business_key,获取业务Id,
     LeaveBill findLeaveBillByTaskId(String taskId);
+
+    List<String> findOutcomeListByTaskId(String taskId);
+
+    List<Comment> findCommentListByTaskId(String taskId);
+
+    //根据指定的outcome路径完成任务
+    void completeTask(WorkflowBean workflowBean);
+
+    //根据taskId查找当前节点的位置坐标
+    Map<String, Double> findCoordinate(String taskId);
+
+    //根据taskId查找相关资源
+    WorkflowBean findWorkflowBeanByTaskId(String taskId);
 }

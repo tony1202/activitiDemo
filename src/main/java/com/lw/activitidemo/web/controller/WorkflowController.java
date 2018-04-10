@@ -6,6 +6,7 @@ import com.lw.activitidemo.sevice.WorkflowService;
 import com.lw.activitidemo.web.form.WorkflowBean;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
@@ -26,6 +27,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipInputStream;
 
 @Controller
@@ -51,7 +53,7 @@ public class WorkflowController {
         List<ProcessDefinition> allProcessDefinition = workflowService.findAllProcessDefinition();
         model.addAttribute("depList",allDeployment);
         model.addAttribute("pdList",allProcessDefinition);
-        return "/workflow/workflow";
+        return "workflow/workflow";
     }
 
     //删除流程部署
@@ -76,7 +78,7 @@ public class WorkflowController {
         Employee user = (Employee) session.getAttribute("user");
         List<Task> allTaskByName = workflowService.findAllTaskByName(user.getName());
         model.addAttribute("list",allTaskByName);
-        return "/workflow/task";
+        return "workflow/task";
     }
 
     /**
@@ -104,9 +106,36 @@ public class WorkflowController {
     public String viewTaskForm(WorkflowBean workflowBean,Model model){
 
         //根据任务ID查询对应业务信息
-        workflowService.findLeaveBillByTaskId(workflowBean.getTaskId());
-        //根据任务id查询连线的集合
+        LeaveBill leaveBill = workflowService.findLeaveBillByTaskId(workflowBean.getTaskId());
+        //根据任务id查询连线的集合,用来显示当前节点可以输出的路径,来对应页面显示按钮
+        List<String> outcomeList = workflowService.findOutcomeListByTaskId(workflowBean.getTaskId());
+        /**查询所有历史审核人的审核信息，帮助当前人完成审核，返回List<Comment>*/
+        List<Comment> commentList = workflowService.findCommentListByTaskId(workflowBean.getTaskId());
+        model.addAttribute("commentList",commentList);
+        model.addAttribute("leaveBill",leaveBill);
+        model.addAttribute("outcomeList",outcomeList);
+        model.addAttribute("taskId",workflowBean.getTaskId());
+        return "workflow/taskForm";
+    }
 
-        return "/workflow/taskForm";
+    /**
+     * 完成任务
+     * @param workflowBean
+     * @return
+     */
+    @PostMapping("/workflowAction_submitTask")
+    public String submitTask(WorkflowBean workflowBean){
+        workflowService.completeTask(workflowBean);
+        return "forward:workflowAction_listTask";
+    }
+
+
+    @RequestMapping("/workflowAction_viewCurrentImage")
+    public String viewCurrentImage(String taskId,Model model){
+        Map<String, Double> coordinate = workflowService.findCoordinate(taskId);
+        WorkflowBean workflowBean = workflowService.findWorkflowBeanByTaskId(taskId);
+        model.addAttribute("acs",coordinate);
+        model.addAttribute("workflowBean",workflowBean);
+        return "workflow/image";
     }
 }
