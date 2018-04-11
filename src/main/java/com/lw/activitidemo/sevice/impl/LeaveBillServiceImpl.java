@@ -37,4 +37,10 @@ public class LeaveBillServiceImpl implements LeaveBillService {
             leaveBillMapper.updateByPrimaryKeySelective(leaveBill);
         }
     }
+
+
+    @Override
+    public LeaveBill findById(Long id) {
+        return leaveBillMapper.selectByPrimaryKey(id);
+    }
 }

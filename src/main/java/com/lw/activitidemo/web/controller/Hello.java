@@ -13,10 +13,7 @@ import java.util.Map;
 @Controller
 public class Hello {
 
-    @RequestMapping("/login")
-    public String info(){
-        return "login";
-    }
+
 
     @RequestMapping("/test")
     public String test(Model model){

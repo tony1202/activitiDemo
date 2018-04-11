@@ -2,6 +2,7 @@ package com.lw.activitidemo.web.controller;
 
 import com.lw.activitidemo.pojo.Employee;
 import com.lw.activitidemo.pojo.LeaveBill;
+import com.lw.activitidemo.sevice.LeaveBillService;
 import com.lw.activitidemo.sevice.WorkflowService;
 import com.lw.activitidemo.web.form.WorkflowBean;
 import org.activiti.engine.repository.Deployment;
@@ -35,10 +36,16 @@ public class WorkflowController {
 
     @Autowired
     private WorkflowService workflowService;
+    @Autowired
+    private LeaveBillService leaveBillService;
 
     @RequestMapping("/workflowAction_viewHisComment")
-    public String viewHisComment(long id){
-        return null;
+    public String viewHisComment(long id,Model model){
+        LeaveBill leaveBill = leaveBillService.findById(id);
+        List<Comment> hisCommentListById = workflowService.findHisCommentListById(id);
+        model.addAttribute("leaveBill",leaveBill);
+        model.addAttribute("list",hisCommentListById);
+        return "workflow/taskFormHis";
     }
 
     @RequestMapping("/workflowAction_startProcess")
@@ -90,6 +97,7 @@ public class WorkflowController {
     public void viewImage(WorkflowBean workflowBean, HttpServletResponse response) throws IOException {
         InputStream inputStream = workflowService.getPrcessImage(workflowBean.getDeploymentId(), workflowBean.getImageName());
         ServletOutputStream outputStream = response.getOutputStream();
+
         try {
             FileCopyUtils.copy(inputStream,outputStream);
         } finally {

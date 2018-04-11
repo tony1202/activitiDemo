@@ -22,4 +22,5 @@
     <bean factory-bean="processEngine" factory-method="getRuntimeService" id="runtimeService"/>
     <bean factory-bean="processEngine" factory-method="getTaskService" id="taskService"/>
     <bean factory-bean="processEngine" factory-method="getHistoryService" id="historyService"/>
+    <bean factory-bean="processEngine" factory-method="getManagementService" id="managementService"/>
 </beans>

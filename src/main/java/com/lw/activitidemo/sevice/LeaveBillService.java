@@ -8,5 +8,6 @@ public interface LeaveBillService {
 
     public List<LeaveBill> findAll();
     public void save(LeaveBill leaveBill);
+    LeaveBill findById(Long id);
 
 }

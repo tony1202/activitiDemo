@@ -37,12 +37,12 @@
 		                <td width="10" valign="bottom">&nbsp;</td>
 		                <td height="24" colspan="2" valign="bottom">
 		                	<select name="name">
-		                		<option value="范冰冰">范冰冰</option>
-		                		<option value="冯小刚">冯小刚</option>
-		                		<option value="范冰冰经纪人">范冰冰经纪人</option>
-		                		<option value="冯小刚经纪人">冯小刚经纪人</option>
-		                		<option value="王中军">王中军</option>
-		                	</select><br/>  
+								<#if list??&&(list?size>0)>
+								    <#list list as name>
+		                				<option value="${name}">${name}</option>
+								    </#list>
+								</#if>
+		                	</select><br/>
 		                </td>
 		              </tr>
 		              

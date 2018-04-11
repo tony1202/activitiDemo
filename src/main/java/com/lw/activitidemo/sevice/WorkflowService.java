@@ -48,4 +48,6 @@ public interface WorkflowService {
 
     //根据taskId查找相关资源
     WorkflowBean findWorkflowBeanByTaskId(String taskId);
+    //根据业务Id查询历史批注
+    List<Comment> findHisCommentListById(Long id);
 }

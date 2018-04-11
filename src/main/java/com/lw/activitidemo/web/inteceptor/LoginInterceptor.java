@@ -1,5 +1,7 @@
 package com.lw.activitidemo.web.inteceptor;
 
+import com.lw.activitidemo.pojo.Employee;
+import com.lw.activitidemo.util.SessionUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,5 +21,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         } else {
             return true;
         }
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        SessionUtils.setSession(request.getSession());
     }
 }

@@ -29,18 +29,20 @@
 		  </tr>
 		  <tr>
 		  	<td>
+				<#if leaveBill??>
 			  		<div align="left" class="STYLE21">
-				 		请假天数:<s:textfield name="days" disabled="true" cssStyle="width: 200px;"/><br/>
-				 		请假原因:<s:textfield name="content" disabled="true" cssStyle="width: 800px;"/><br/>
-				 		请假备注:<s:textarea name="remark" disabled="true" cols="30" rows="2"/><br/>
+				 		请假天数:<input name="days" value="${leaveBill.days}" disabled="true" cssStyle="width: 200px;"/><br/>
+				 		请假原因:<input name="content" value="${leaveBill.content}" disabled="true" cssStyle="width: 800px;"/><br/>
+				 		请假备注:<input name="remark" value="${leaveBill.remark}" disabled="true" cols="30" rows="2"/><br/>
 				 		<input type="button" name="button" value="返回" class="button_ok" onclick="javascript:history.go(-1);"/>
 			 		</div>
+				</#if>
 		  	</td>
 		  </tr>
 	</table>
 	<hr>
 	<br>
-		<s:if test="#commentList!=null && #commentList.size()>0">
+		<#if list??&&(list?size>0)>
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			  <tr>
 			    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -67,20 +69,18 @@
 			        <td width="10%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">批注人</span></div></td>
 			        <td width="75%" height="20" bgcolor="d3eaef" class="STYLE6"><div align="center"><span class="STYLE10">批注信息</span></div></td>
 			      </tr>
-			      <s:iterator value="#commentList">
+				  <#list list as comment>
 			      	<tr>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center"><s:date name="time" format="yyyy-MM-dd HH:mm:ss"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="userId"/></div></td>
-				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center"><s:property value="fullMessage"/></div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE6"><div align="center">${comment.time?string('yyyy-MM-dd HH:mm:ss')}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${comment.userId}</div></td>
+				        <td height="20" bgcolor="#FFFFFF" class="STYLE19"><div align="center">${comment.fullMessage}</div></td>
 				    </tr> 
-			      </s:iterator>
-			        
+				  </#list>
 			      
 			    </table></td>
 			  </tr>
 		</table>
-	</s:if>
-	<s:else>
+		<#else >
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
 			  <tr>
 			    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -99,7 +99,6 @@
 			    </table></td>
 			  </tr>
 		</table>
-	</s:else>
-	
+		</#if>
 </body>
 </html>

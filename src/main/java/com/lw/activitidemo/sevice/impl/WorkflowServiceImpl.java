@@ -8,10 +8,9 @@ import com.lw.activitidemo.sevice.WorkflowService;
 import com.lw.activitidemo.web.form.WorkflowBean;
 import org.activiti.bpmn.model.*;
 import org.activiti.bpmn.model.Process;
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
+import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricVariableInstance;
 import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.repository.Deployment;
@@ -48,6 +47,8 @@ public class WorkflowServiceImpl implements WorkflowService {
     private RuntimeService runtimeService;
     @Autowired
     private HistoryService historyService;
+    @Autowired
+    private ManagementService managementService;
 
     @Override
     public void startProcess(WorkflowBean workflowBean) {
@@ -169,6 +170,31 @@ public class WorkflowServiceImpl implements WorkflowService {
         String processInstanceId = task.getProcessInstanceId();
         List<Comment> commentList = taskService.getProcessInstanceComments(processInstanceId);
         return commentList;
+    }
+
+    /**
+     * 根据业务Id获取其历史批注
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Comment> findHisCommentListById(Long id) {
+        LeaveBill leaveBill = leaveBillMapper.selectByPrimaryKey(id);
+        //流程定义的key
+        String processDefKey = leaveBill.getClass().getSimpleName();
+        //获取关联业务的流程变量
+        String objId = processDefKey+":"+id;
+
+
+        /** 1.通过历史查询business_key，方法1和2，是一样的，*/
+        HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceBusinessKey(objId).singleResult();
+        String processInstanceId = historicProcessInstance.getId();
+        /**2. 通过流程变两查询*/
+        HistoricVariableInstance historicVariableInstance = historyService.createHistoricVariableInstanceQuery().variableValueEquals("objId",objId).singleResult();
+        String processInstanceId1 = historicProcessInstance.getId();
+
+        List<Comment> processInstanceComments = taskService.getProcessInstanceComments(processInstanceId);
+        return processInstanceComments;
     }
 
     /**

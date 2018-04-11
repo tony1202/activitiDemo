@@ -20,14 +20,22 @@ public class EmployeeServiceImple implements EmployeeService{
         Example example = new Example(Employee.class);
         example.createCriteria().andEqualTo("name", name);
         List<Employee> employees = employMapper.selectByExample(example);
-        if (employees!=null&&employees.size()>0)
+        if (employees!=null&&employees.size()>0){
             return employees.get(0);
+        }
         return null;
     }
 
     @Override
     public String findManagerByName(String name) {
 
-        return employMapper.findManagerByName(name);
+        String managerByName = employMapper.findManagerByName(name);
+        return managerByName;
+    }
+
+    @Override
+    public List<String> findAllUser() {
+        List<String> allUser = employMapper.findAllUser();
+        return allUser;
     }
 }
