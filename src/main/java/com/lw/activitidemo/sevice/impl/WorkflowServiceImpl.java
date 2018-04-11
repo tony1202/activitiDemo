@@ -261,7 +261,7 @@ public class WorkflowServiceImpl implements WorkflowService {
         map.put("X",graphicInfo.getX());
         map.put("Y",graphicInfo.getY());
         map.put("width",graphicInfo.getWidth());
-        map.put("hegiht",graphicInfo.getHeight());
+        map.put("height",graphicInfo.getHeight());
         return map;
     }
 
