@@ -2,6 +2,8 @@ package com.lw.activitidemo.web.listener;
 
 import com.lw.activitidemo.pojo.Employee;
 import com.lw.activitidemo.sevice.EmployeeService;
+import com.lw.activitidemo.sevice.impl.EmployeeServiceImple;
+import com.lw.activitidemo.util.ApplicationContextUtil;
 import com.lw.activitidemo.util.SessionUtils;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
@@ -19,8 +21,10 @@ public class HandlerTaskListener implements TaskListener {
 
         HttpSession session = SessionUtils.getSession();
         Employee user = (Employee) session.getAttribute("user");
-        EmployeeService employeeService = (EmployeeService) session.getAttribute("employeeService");
+        //EmployeeService employeeService = (EmployeeService) session.getAttribute("employeeService");
         String inputUser = user.getName();
+
+        EmployeeServiceImple employeeService = (EmployeeServiceImple) ApplicationContextUtil.getBean(EmployeeServiceImple.class);
 
         //获取当前用户的manager
         String nextAssignee = employeeService.findManagerByName(inputUser);
